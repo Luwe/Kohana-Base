@@ -167,7 +167,7 @@ abstract class Ljbase_Controller_Default extends Controller {
       // If no View class exists, try to send back the bare template (useful for static content)
       if ($file = Kohana::find_file('templates', $full_view_path, 'mustache'))
       {
-		    return file_get_contents($file);
+        return file_get_contents($file);
       }
 
       return NULL;
