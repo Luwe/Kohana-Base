@@ -6,7 +6,7 @@
  * subrequests within an HMVC structure or AJAX widgets. The response body
  * will be sent back in the format provided by the accept header.
  * 
- * @todo       Add Session and Cookie support
+ * @todo       Add Cookie support
  * @todo       Add auth support     
  * @uses       Modules/Kostache v3.1.x <git://github.com/zombor/KOstache.git>
  * @package    LJBase
@@ -27,6 +27,12 @@ abstract class Ljbase_Controller_Default extends Controller {
    * @var  Kostache
    */
   public $view;
+
+  /**
+   * Holds the current session
+   * @var  Kohana_Session
+   */
+  public $session;
   
   /**
    * Autorender request response
@@ -115,6 +121,9 @@ abstract class Ljbase_Controller_Default extends Controller {
       // Set view object
       $this->view = $this->_prepare_view($view_path, $this->_response_format);
     }
+
+    // Initialize session (default adapter is database)
+    $this->session = Session::instance('database');
   }
   
   /**
