@@ -18,9 +18,15 @@ abstract class Ljbase_Controller_Default extends Controller {
   /**
    * Set flags for dealing with initial, sub and ajax requests to this controller
    */
-  const REQUEST_INITIAL = 1;
-  const REQUEST_SUB     = 2;
-  const REQUEST_AJAX    = 3;
+  const REQUEST_INITIAL  = 1;
+  const REQUEST_SUB      = 2;
+  const REQUEST_AJAX     = 3;
+
+  /**
+   * Session adapter (can be: native, default or cookie)
+   * @var  string
+   */
+  const SESSION_ADAPTER = 'database';
 
   /**
    * Holds the view object for the current request
@@ -72,6 +78,8 @@ abstract class Ljbase_Controller_Default extends Controller {
    * Method which is executed before any action takes place   
    * 
    * @return  void 
+   * @uses    Arr
+   * @uses    Kohana::config()
    * @throws  Http_Exception_403  if initial requests to this controller are not allowed
    * @throws  Http_Exception_415  if response-format is not supported by this controller
    */
@@ -89,9 +97,7 @@ abstract class Ljbase_Controller_Default extends Controller {
     {
       // Check if initial requests are allowed
       if ($this->_allow_initial_request !== TRUE)
-      {
         throw new Http_Exception_403('Initial requests are forbidden');
-      }
 
       $this->_request_type = self::REQUEST_INITIAL;
     }
@@ -123,7 +129,7 @@ abstract class Ljbase_Controller_Default extends Controller {
     }
 
     // Initialize session (default adapter is database)
-    $this->session = Session::instance('database');
+    $this->session = Session::instance(self::SESSION_ADAPTER);
   }
   
   /**

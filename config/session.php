@@ -15,16 +15,16 @@ return array
 (
   'native'   => array(
     'name'     => 'session',
-    'lifetime' => 43200,
+    'lifetime' => 0,
   ),
   'cookie'   => array(
     'name'      => 'session',
     'encrypted' => TRUE,
-    'lifetime'  => 43200,
+    'lifetime'  => 0,
   ),
   'database' => array(
     'encrypted' => FALSE,
-    'lifetime'  => 43200,
+    'lifetime'  => 0,
     'group'     => 'default',
     'table'     => 'session',
     'columns'   => array(
