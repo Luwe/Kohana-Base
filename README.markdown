@@ -14,11 +14,11 @@ LJBase aims to keep controllers light and therefore uses Kostache to separate ap
 ## Used Kohana modules
 
 - ### kohana/core
-  - **url** : `https://github.com/kohana/core.git`
+  - **url** : `https://github.com/kohana/core`
   - **version** : `3.1.x`
   
 - ### modules/kostache
-	- **url** : `git://github.com/zombor/KOstache.git`
+	- **url** : `https://github.com/zombor/KOstache`
   - **version** : `3.1.x`
   
 ## Disclaimer
