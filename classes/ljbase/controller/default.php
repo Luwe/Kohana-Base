@@ -7,7 +7,6 @@
  * will be sent back in the format provided by the accept header.
  * 
  * @todo       Add Cookie support
- * @todo       Add auth support     
  * @uses       Modules/Kostache v3.1.x <git://github.com/zombor/KOstache.git>
  * @package    LJBase
  * @author     Lieuwe Jan Eilander
