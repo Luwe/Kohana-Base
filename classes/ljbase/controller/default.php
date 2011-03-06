@@ -22,12 +22,6 @@ abstract class Ljbase_Controller_Default extends Controller {
   const REQUEST_AJAX     = 3;
 
   /**
-   * Session adapter (can be: native, default or cookie)
-   * @var  string
-   */
-  const SESSION_ADAPTER = 'database';
-
-  /**
    * Holds the view object for the current request
    * @var  Kostache
    */
@@ -128,7 +122,7 @@ abstract class Ljbase_Controller_Default extends Controller {
     }
 
     // Initialize session (default adapter is database)
-    $this->session = Session::instance(self::SESSION_ADAPTER);
+    $this->session = Session::instance();
   }
   
   /**
