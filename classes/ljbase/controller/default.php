@@ -195,8 +195,8 @@ abstract class Ljbase_Controller_Default extends Controller {
   {
     // Add components for uri
     $components = array(
-      'controller' => $controller,
-      'action'     => $action,
+      'controller' => (string) $controller,
+      'action'     => (string) $action,
     );
     $components += $overflow;
 
