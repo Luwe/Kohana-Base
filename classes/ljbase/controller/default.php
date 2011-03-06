@@ -181,5 +181,30 @@ abstract class Ljbase_Controller_Default extends Controller {
       return NULL;
     }
   }
+
+  /**
+   * Redirect function implementing reverse routing
+   *
+   * @param   string  Route name to be used for reverse routing
+   * @param   string  Request controller
+   * @param   string  Request action
+   * @param   array   Overflow (for instance: directory or id to be added to the uri)
+   * @return  void
+   */
+  protected function _redirect($route, $controller = 'home', $action = 'index', array $overflow = array())
+  {
+    // Add components for uri
+    $components = array(
+      'controller' => $controller,
+      'action'     => $action,
+    );
+    $components += $overflow;
+
+    // Create uri using components
+    $uri = Route::get($route)->uri($components);
+
+    // Redirect
+    $this->request->redirect($uri);
+  }
   
 }
