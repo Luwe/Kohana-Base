@@ -107,7 +107,7 @@ abstract class Ljbase_View_Default extends Ljbase_View_Core {
     // Check if filename has protocol
     if ( ! strchr($file, '://'))
     {
-      $file = URL::site(Kohana::config('media.'.$extension).$file);
+      $file = URL::site(Kohana::config('media.'.$extension).$file, NULL, FALSE);
     }
     
     return $file;
