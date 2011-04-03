@@ -46,7 +46,7 @@ abstract class Ljbase_View_Default extends Ljbase_View_Core {
    */
   public function favicon()
   {
-    return URL::site(Kohana::config('media.images').Kohana::config('website.favicon'));
+    return URL::site(Kohana::config('media.images').Kohana::config('website.favicon'), NULL, FALSE);
   }
   
   /**
