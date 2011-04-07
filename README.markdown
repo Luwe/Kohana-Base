@@ -1,6 +1,6 @@
 # LJBase module
 
-*Start new projects using basic configurations*
+*Start new Kohana projects using using accept header based request handling*
 
 - **Version:** 0.2.0
 - **URL:** <https://github.com/Luwe/Kohana-Base>
