@@ -1,14 +1,7 @@
-# NOTICE!
-
-This module uses 'content negotion' to determine the response type (html, json, xml etc.) of the page. In theory, this is the best way to handle Views which could be used for multiple response types. However, content negotiation is handled differently by every browser so this is not useful in practice. See <https://github.com/Luwe/Kohana-Base-Alternative> for a more useful alternative.
-
-Also see <http://www.gethifi.com/blog/browser-rest-http-accept-headers> on this topic.
-
 # LJBase module
 
 *Start new Kohana projects using using accept header based request handling*
 
-- **Version:** 0.2.0
 - **URL:** <https://github.com/Luwe/Kohana-Base>
 
 ## Description
@@ -21,11 +14,11 @@ LJBase aims to keep controllers light and therefore uses Kostache to separate ap
 
 - ### kohana/core
   - **url** : <https://github.com/kohana/core>
-  - **version** : `3.1.x`
+  - **version** : `3.3.x`
   
 - ### modules/kostache
 	- **url** : <https://github.com/zombor/KOstache>
-  - **version** : `3.1.x`
+  - **version** : `4.0.x`
   
 ## Disclaimer
 
