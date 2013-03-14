@@ -22,8 +22,8 @@ abstract class Ljbase_Controller_Default extends Controller {
   const REQUEST_AJAX     = 3;
 
   /**
-   * Holds the view object for the current request
-   * @var  Kostache
+   * Holds the view object (as a string) for the current request
+   * @var  str
    */
   public $view;
 
@@ -113,12 +113,13 @@ abstract class Ljbase_Controller_Default extends Controller {
       $this->_response_format = key($accept_types);
       
       // Set path to view class
-      $directory = Request::current()->directory() ? Request::current()->directory().'/' : '';
-      $view_path = $directory.Request::current()->controller().'/'.Request::current()->action();
-      $view_path = strtolower($view_path);
+      $directory = Request::current()->directory() ? Request::current()->directory().'_' : '';
       
-      // Set view object
-      $this->view = $this->_prepare_view($view_path, $this->_response_format);
+      // Set view class
+      $this->view = 'View_'.$directory.Request::current()->controller().'_'.Request::current()->action();
+
+      // Uppercase each word in the class name
+      $this->view = join('_', array_map('ucwords', explode('_', $this->view)));
     }
 
     // Initialize session (default adapter is database)
@@ -135,51 +136,15 @@ abstract class Ljbase_Controller_Default extends Controller {
   {
     if ($this->auto_render === TRUE)
     {
-      // Check if view object is not empty
-      if ($this->view === NULL)
-        throw new Http_Exception_404('Page not found');
-      
       // Set header content-type to response format
       $this->response->headers('Content-Type', $this->_response_format);
       
       // Set response body
-      $this->response->body($this->view);
+      $this->response->body(Kostache_Layout::factory()->render(new $this->view));
     }
     
     // Execute parent method
     parent::after();
-  }
-  
-  /**
-   * Method to ensure Views use the correct response format for the request
-   * 
-   * @param   string   Requested view path
-   * @param   string   Requested response format
-   * @return  mixed
-   */
-  protected function _prepare_view($view_path, $response_format = 'text/html')
-  { 
-    // Return NULL if format is not accepted   
-    if (($format_path = Arr::get($this->_accept_formats, $response_format, NULL)) === NULL)
-      return NULL;
-    
-    // Include format_path if needed
-    $full_view_path = trim($view_path.'/'.$format_path, '/');
-    
-    try
-    {
-      return Kostache::factory($full_view_path);
-    }
-    catch (Kohana_Exception $e)
-    {
-      // If no View class exists, try to send back the bare template (useful for static content)
-      if ($file = Kohana::find_file('templates', $full_view_path, 'mustache'))
-      {
-        return file_get_contents($file);
-      }
-
-      return NULL;
-    }
   }
 
   /**
