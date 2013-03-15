@@ -62,8 +62,8 @@ abstract class Ljbase_Controller_Default extends Controller {
    * @var  array
    */
   protected $_accept_formats = array(
-    'text/html'              => '',
-    'application/xhtml+xml'  => '',
+    'text/html'              => 'layout',
+    'application/xhtml+xml'  => 'layout',
     'application/json'       => 'json',      
   );
   
@@ -140,7 +140,8 @@ abstract class Ljbase_Controller_Default extends Controller {
       $this->response->headers('Content-Type', $this->_response_format);
       
       // Set response body
-      $this->response->body(Kostache_Layout::factory()->render(new $this->view));
+      Kostache_Layout::factory($this->_accept_formats[$this->_response_format])
+        ->render(new $this->view);
     }
     
     // Execute parent method
