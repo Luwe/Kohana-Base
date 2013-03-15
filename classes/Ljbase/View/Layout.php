@@ -12,12 +12,6 @@
 abstract class Ljbase_View_Layout extends Ljbase_View_Core {
   
   /**
-   * Holds the website layout template
-   * @var  string  
-   */
-  protected $_layout = 'default';  
-  
-  /**
    * Array of javascript files relative to the js mediapath in config
    * @var  array
    */
@@ -36,7 +30,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
    */
   public function title()
   {
-    return (string) Kohana::config('website.title');
+    return (string) Kohana::$config->load('website')->get('title');
   } 
   
   /**
@@ -46,7 +40,8 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
    */
   public function favicon()
   {
-    return URL::site(Kohana::config('media.images').Kohana::config('website.favicon'), NULL, FALSE);
+    return URL::site(Kohana::$config->load('media')->get('images').
+      Kohana::$config->load('website')->get('favicon'), NULL, FALSE);
   }
   
   /**
@@ -107,7 +102,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
     // Check if filename has protocol
     if ( ! strchr($file, '://'))
     {
-      $file = URL::site(Kohana::config('media.'.$extension).$file, NULL, FALSE);
+      $file = URL::site(Kohana::$config->load('media')->get($extension).$file, NULL, FALSE);
     }
     
     return $file;

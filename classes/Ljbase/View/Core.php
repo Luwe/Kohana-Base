@@ -13,7 +13,7 @@
  * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
  */
 abstract class Ljbase_View_Core {
-   
+  
   /**
    * Add initial settings from a config file to an existing array
    * 
@@ -28,7 +28,7 @@ abstract class Ljbase_View_Core {
     $type = ($type) ? '.'. (string) $type : '';
     
     // Check if initial array exists, otherwise send back original $var
-    if ( ! ($initial = Kohana::config($config_file.$type)))
+    if ( ! ($initial = Kohana::$config->load($config_file)->get($type)))
       return $var;
 
     return array_merge($initial, $var);

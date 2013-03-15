@@ -4,12 +4,4 @@
  * 
  * @package  LJBase
  */
-abstract class Ljbase_View_Widget extends View_Core {
-  
-  /**
-   * Setting render layout to FALSE to ensure full layout is not created
-   * @var  boolean
-   */
-  public $render_layout = FALSE;
-  
-}
+abstract class Ljbase_View_Widget extends View_Core {}
