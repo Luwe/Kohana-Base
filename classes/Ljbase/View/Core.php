@@ -12,7 +12,7 @@
  * @author     Lieuwe Jan Eilander
  * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
  */
-abstract class Ljbase_View_Core extends Kostache_Layout {
+abstract class Ljbase_View_Core {
    
   /**
    * Add initial settings from a config file to an existing array
