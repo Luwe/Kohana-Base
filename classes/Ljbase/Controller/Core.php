@@ -12,7 +12,7 @@
  * @author     Lieuwe Jan Eilander
  * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
  */
-abstract class Ljbase_Controller_Default extends Controller {
+abstract class Ljbase_Controller_Core extends Controller {
 
   /**
    * Set flags for dealing with initial, sub and ajax requests to this controller
@@ -140,8 +140,11 @@ abstract class Ljbase_Controller_Default extends Controller {
       $this->response->headers('Content-Type', $this->_response_format);
       
       // Set response body
-      Kostache_Layout::factory($this->_accept_formats[$this->_response_format])
-        ->render(new $this->view);
+      $test = Kostache_Layout::factory($this->_accept_formats[$this->_response_format])->render(new View_Home_Index);
+      echo Debug::vars($test);
+      exit;
+      $this->response->body(Kostache_Layout::factory($this->_accept_formats[$this->_response_format])
+        ->render(new $this->view));
     }
     
     // Execute parent method

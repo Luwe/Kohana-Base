@@ -9,7 +9,7 @@
  * @author     Lieuwe Jan Eilander
  * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
  */
-abstract class Ljbase_View_Default extends Ljbase_View_Core {
+abstract class Ljbase_View_Layout extends Ljbase_View_Core {
   
   /**
    * Holds the website layout template
