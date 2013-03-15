@@ -140,9 +140,6 @@ abstract class Ljbase_Controller_Core extends Controller {
       $this->response->headers('Content-Type', $this->_response_format);
       
       // Set response body
-      $test = Kostache_Layout::factory($this->_accept_formats[$this->_response_format])->render(new View_Home_Index);
-      echo Debug::vars($test);
-      exit;
       $this->response->body(Kostache_Layout::factory($this->_accept_formats[$this->_response_format])
         ->render(new $this->view));
     }
