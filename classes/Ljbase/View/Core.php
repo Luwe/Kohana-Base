@@ -13,25 +13,22 @@
  * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
  */
 abstract class Ljbase_View_Core {
-  
-  /**
-   * Add initial settings from a config file to an existing array
-   * 
-   * @param   mixed  array to prepend initial settings to
-   * @param   mixed  config file
-   * @param   mixed  config variable (dotnotation enabled type.subtype etc.)
-   * @return  array
-   */
-  protected function _add_initial_settings(array $var, $config_file = 'website', $type = 'css')
-  {
-    $config_file = (string) $config_file;
-    $type = ($type) ? '.'. (string) $type : '';
-    
-    // Check if initial array exists, otherwise send back original $var
-    if ( ! ($initial = Kohana::$config->load($config_file)->get($type)))
-      return $var;
 
-    return array_merge($initial, $var);
+  /**
+   * Website config group
+   * @var  Kohana_Config_Group
+   */
+  protected $_config;
+
+  /**
+   * Loads a new config file
+   *
+   * @param   string  Config file to load
+   * @return  void
+   */
+  public function __construct($config_file = 'website')
+  {
+    $this->_config = Kohana::$config->load($config_file);
   }
   
 }

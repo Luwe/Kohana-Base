@@ -30,7 +30,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
    */
   public function title()
   {
-    return (string) Kohana::$config->load('website')->get('title');
+    return (string) $this->_config['title'];
   } 
   
   /**
@@ -40,8 +40,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
    */
   public function favicon()
   {
-    return URL::site(Kohana::$config->load('media')->get('images').
-      Kohana::$config->load('website')->get('favicon'), NULL, FALSE);
+    return URL::site($this->_config['media']['images'].$this->_config['favicon'], NULL, FALSE);
   }
   
   /**
@@ -52,7 +51,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
   public function scripts()
   {
     // Add initial global scripts
-    $this->_scripts = $this->_add_initial_settings($this->_scripts, 'website', 'files.js');
+    $this->_scripts = array_merge($this->_config['files']['js'], $this->_scripts); 
     
     $scripts = array();
     
@@ -73,7 +72,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
   public function stylesheets() 
   {
     // Add initial global stylesheets
-    $this->_stylesheets = $this->_add_initial_settings($this->_stylesheets, 'website', 'files.css'); 
+    $this->_stylesheets = array_merge($this->_config['files']['css'], $this->_stylesheets); 
     
     $stylesheets = array();
     
@@ -102,7 +101,7 @@ abstract class Ljbase_View_Layout extends Ljbase_View_Core {
     // Check if filename has protocol
     if ( ! strchr($file, '://'))
     {
-      $file = URL::site(Kohana::$config->load('media')->get($extension).$file, NULL, FALSE);
+      $file = URL::site($this->_config['media'][$extension].$file, NULL, FALSE);
     }
     
     return $file;
