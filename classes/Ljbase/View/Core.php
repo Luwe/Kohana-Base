@@ -10,7 +10,7 @@
  * 
  * @package    LJBase
  * @author     Lieuwe Jan Eilander
- * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
+ * @copyright  (c) 2010-2013 Lieuwe Jan Eilander
  */
 abstract class Ljbase_View_Core {
 

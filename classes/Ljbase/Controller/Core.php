@@ -6,11 +6,10 @@
  * subrequests within an HMVC structure or AJAX widgets. The response body
  * will be sent back in the format provided by the accept header.
  * 
- * @todo       Add Cookie support
- * @uses       Modules/Kostache v3.1.x <git://github.com/zombor/KOstache.git>
+ * @uses       Modules/Kostache v4.x.x <git://github.com/zombor/KOstache.git>
  * @package    LJBase
  * @author     Lieuwe Jan Eilander
- * @copyright  (c) 2010-2011 Lieuwe Jan Eilander
+ * @copyright  (c) 2010-2013 Lieuwe Jan Eilander
  */
 abstract class Ljbase_Controller_Core extends Controller {
 
@@ -23,7 +22,7 @@ abstract class Ljbase_Controller_Core extends Controller {
 
   /**
    * Holds the view object (as a string) for the current request
-   * @var  str
+   * @var  string
    */
   public $view;
 
@@ -71,8 +70,6 @@ abstract class Ljbase_Controller_Core extends Controller {
    * Method which is executed before any action takes place   
    * 
    * @return  void 
-   * @uses    Arr
-   * @uses    Kohana::config()
    * @throws  Http_Exception_403  if initial requests to this controller are not allowed
    * @throws  Http_Exception_415  if response-format is not supported by this controller
    */
@@ -90,7 +87,7 @@ abstract class Ljbase_Controller_Core extends Controller {
     {
       // Check if initial requests are allowed
       if ($this->_allow_initial_request !== TRUE)
-        throw new Http_Exception_403('Initial requests are forbidden');
+        throw Http_Exception::factory(403, 'Initial requests are forbidden');
 
       $this->_request_type = self::REQUEST_INITIAL;
     }
@@ -107,7 +104,7 @@ abstract class Ljbase_Controller_Core extends Controller {
       
       // Throw exception if none of the accept-types are supported
       if( ! $accept_types = array_filter($accept_types))
-        throw new Http_Exception_415('Unsupported accept-type', NULL);
+        throw Http_Exception::factory(415, 'Unsupported accept-type');
     
       // Set response format to first matched element  
       $this->_response_format = key($accept_types);
@@ -130,7 +127,6 @@ abstract class Ljbase_Controller_Core extends Controller {
    * Method which is executed after any action
    * 
    * @return  void
-   * @throws  Http_Exception_404  if view not found 
    */
   public function after()
   {
@@ -170,7 +166,7 @@ abstract class Ljbase_Controller_Core extends Controller {
     $uri = Route::get($route)->uri($components);
 
     // Redirect
-    $this->request->redirect($uri);
+    $this->redirect($uri);
   }
   
 }
